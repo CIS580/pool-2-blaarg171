@@ -28,6 +28,7 @@ for(var i = 0; i < 18; i++){
     pocketed: false
   });
 }
+balls.sort(function(a,b){return b.position.x - a.position.x});
 rack();
 
 /**
@@ -174,6 +175,27 @@ function update(elapsedTime) {
   });
 
   // check for ball collisions
+  
+  // first pass at collisions
+  balls.sort(function(a,b){return b.position.x - a.position.x});
+  var active = [];
+  var potCollide = [];
+  balls.forEach(function(ball, index){
+    active = active.filter(function(oball){
+      return oball.position.x >= ball.position.x-30;
+    });
+    active.forEach(function(oball){
+      potCollide.push({a:oball, b: ball});
+    });
+    active.push(ball);
+  });
+  
+  // second pass at collisions
+  var collisions = [];
+  potCollide.forEach(function({
+    
+  });
+  
   // TODO: Check for ball collisions
   // TODO: Process ball collisions
 }
